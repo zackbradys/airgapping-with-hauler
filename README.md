@@ -50,15 +50,14 @@ Text here...
 
 ![rgs-hauler-banner](images/hauler-diagram.png)
 
-Text here...
+## Airgapping with Hauler
+
+Now that we understand the basics of Hauler and the basis of airgapped environments, let's dive into the typical workflow...
 
 ![rgs-hauler-banner](images/hauler-workflow-diagram.png)
 
-## Airgapping with Hauler
 
-Now that we understand the basics of Hauler and the basis of airgapped environments. Let's dive into installing and using it!
-
-Text here...
+Let's dive into installing and using it!
 
 ```bash
 # install latest release
