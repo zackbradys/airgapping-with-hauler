@@ -21,31 +21,31 @@ contact: zack.brady@ranchergovernment.com
 
 ## Overview and Introduction
 
-In today's highly connected world, we sometimes forget that there are many instances, espcially in the government, where environments need to be intentionally isolated from external connectivity, creating what is known as an airgapped or disconnected environment. In some cases, these environments may have external connectivity, but that connectivity is extremely unreliable or is imited in it's communication, creating what is known as a denied, disrupted, intermittent, and limited impact environment.
+In today's highly connected world, we sometimes forget that there are many instances, especially in the government, where environments need to be intentionally isolated from external connectivity, creating what is known as an air-gapped or disconnected environment. In some cases, these environments may have external connectivity, but that connectivity is extremely unreliable or is limited in its communication, creating what is known as a denied, disrupted, intermittent, and limited impact environment.
 
-After working in these types of environments for years, most teams spent a significant amount of time developing custom code for moving artifacts between these environments. Unfortunately, this is never an easy process and extremely time consuming. Here at Rancher Government, we are very familiar with the need to improve the process of working in these environments and recently released a tool that is purpose built to simplify the airgap experience.
+After working in these types of environments for years, most teams spent a significant amount of time developing custom code or scripts for moving artifacts between these environments. Unfortunately, this is never an easy process and extremely time-consuming. Here at Rancher Government, we are very familiar with the need to improve the process of working in these environments and recently released a tool that is purpose-built to simplify the airgap experience.
 
 ## Rancher Government Hauler
 
 **Hauler** simplifies the airgap experience by providing a straightforward approach that doesn't require operators to adhere to a specific workflow. It is designed as a standalone binary with zero dependencies. **Hauler** represents assets as artifacts and supports container images, helm charts, and files. Additionally, **Hauler** groups these artifacts into **content** and **collections**, allowing operators to easily fetch, store, package, and distribute these assets using declarative manifests or through the command line.
 
-**Hauler** achieves this by storing it's **content** and **collections** as OCI Compliant Artifacts and even provides bootstrapping utilities such as an embedded registry and embedded fileserver.
+**Hauler** achieves this by storing its **content** and **collections** as *OCI Compliant Artifacts* and even provides bootstrapping utilities such as an embedded registry and embedded fileserver.
 
 To better understand the core concepts of Hauler and how they fit together, let's take a look at the diagram below:
 
 ![rgs-hauler-banner](images/hauler-diagram.png)
 
-Now that you've been introduced to the core concepts and basics of **Hauler**, let's take a look at the typical airgappped or disconnected workflow used when working with **Hauler**:
+Now that you've been introduced to the core concepts and basics of **Hauler**, let's take a look at the typical air-gapped or disconnected workflow used when working with **Hauler**:
 
 ![rgs-hauler-banner](images/hauler-workflow-diagram.png)
 
 ## Testing out Hauler
 
-As we briefly mentioned earlier, **Hauler** has zero dependencies, besides itself, so we don't have any prerequistes besides two servers to simulate our airgapped environment.
+As we briefly mentioned earlier, **Hauler** *has zero dependencies*, besides itself, so we don't have any prerequisites besides two servers to simulate our air-gapped environment.
 
-Let's designate one server as the **connected server** and one server as the **disconnected server**. For me, you will notice I'm the `root` user on my `connected-server` and my `disconnected-server`.
+Let's designate one server as the **connected server** and one server as the **disconnected server**. For me, you will notice I'm the root user on my `connected-server` and my `disconnected-server`.
 
-Let's start by **downloading and installing Hauler!** As you can see, there is an easy to use installation script!
+Let's start by **downloading and installing Hauler!** As you can see, there is an easy-to-use installation script!
 
 ```bash
 # sudo to root
@@ -99,7 +99,7 @@ Use "hauler [command] --help" for more information about a command.
 
 ---
 
-Feel free to continue exploring the command line, but we're going to move onto adding some artifacts to our `store`. We haven't mentioned it yet, but **Hauler** uses `stores` to logically seperate artifacts into directories and the default name is `store`.
+Feel free to continue exploring the command line, but we're going to move onto adding some artifacts to our `store`. We haven't mentioned it yet, but **Hauler** uses `stores` to logically separate artifacts into directories and the default name is `store`.
 
 We're going to stick with using the command line for today, but if you would like to see an example of adding these same artifacts to the `store` using a manifest, feel free to view it below!
 
@@ -379,4 +379,4 @@ Let's copy the artifacts to an exiting `fileserver` by running the command below
 
 Congratulations! You made it!! Hopefully, you realize how **Hauler** would be able to simplify and streamline your existing processes for fetching, packaging, validating, and distributing artfacts to airgapped, disconnected, or denied, disrupted, intermittent, and limited impact environments.
 
-To learn more, please visit the [GitHub Repository](https://github.com/rancherfederal/hauler) or check out the [Official Documentation](https://hauler.dev). For any questions or to get in touch with me, please send me an email at[zack.brady@ranchergovernment.com](mailto:zack.brady@ranchergovernment.com)!
+To learn more, please visit the [Hauler GitHub Repository](https://github.com/rancherfederal/hauler) or check out the [Official Documentation for Hauler](https://hauler.dev). For any questions or to get in touch with me, please send me an email at [zack.brady@ranchergovernment.com](mailto:zack.brady@ranchergovernment.com), connect with me on Linkedin ([@zackbradys](https://linkedin.com/in/zackbradys)), or follow me on Github ([@zackbradys](https://github.com/zackbradys))!
