@@ -23,7 +23,7 @@ contact: zack.brady@ranchergovernment.com
 
 In today's highly connected world, we sometimes forget that there are many instances, espcially in the government, where environments need to be intentionally isolated from external connectivity, creating what is known as an airgapped or disconnected environment. In some cases, these environments may have external connectivity, but that connectivity is extremely unreliable or is imited in it's communication, creating what is known as a denied, disrupted, intermittent, and limited impact environment.
 
-After working in these types of environments for years, most teams spent a significant amount of time developing custom code for moving artifacts between these environments. Unfortunately, this is never an easy process and extremely time consuming. Here at Rancher Government, we are very familiar with the need to improve the process of working in these environments and recently released a tool that is purpose built to simplify the airgap expierence.
+After working in these types of environments for years, most teams spent a significant amount of time developing custom code for moving artifacts between these environments. Unfortunately, this is never an easy process and extremely time consuming. Here at Rancher Government, we are very familiar with the need to improve the process of working in these environments and recently released a tool that is purpose built to simplify the airgap experience.
 
 ## Rancher Government Hauler
 
@@ -49,10 +49,10 @@ Let's start by **downloading and installing Hauler!** As you can see, there is a
 
 ```bash
 # sudo to root
-[rocky@connected-server hauler]# sudo su
+[rocky@connected-server hauler] sudo su
 
 # install latest release
-[root@connected-server hauler]# curl -sfL https://get.hauler.dev | bash
+[root@connected-server hauler] curl -sfL https://get.hauler.dev | bash
 
 [INFO] Hauler: Starting Installation...
 - Version: v1.0.0
@@ -74,7 +74,7 @@ Let's start by **downloading and installing Hauler!** As you can see, there is a
 Once we have successfully installed it, let's take a look at all the available commands:
 
 ```bash
-[root@connected-server hauler]# hauler --help
+[root@connected-server hauler] hauler --help
 Airgap Swiss Army Knife
 
 Usage:
@@ -107,21 +107,21 @@ Let's run the following commands below:
 
 ```bash
 # add a image... defaults to latest and docker.io
-[root@connected-server hauler]# hauler store add image neuvector/scanner
+[root@connected-server hauler] hauler store add image neuvector/scanner
 3:31PM INF added 'image' to store at [index.docker.io/neuvector/scanner:latest]
 
 # add a image with a specific platform and with supply chain artifacts
 # may not work for all users due to the specified registry
-[root@connected-server hauler]# hauler store add image rgcrprod.azurecr.us/longhornio/longhorn-ui:v1.6.0 --platform linux/amd64 --key carbide-key.pub
+[root@connected-server hauler] hauler store add image rgcrprod.azurecr.us/longhornio/longhorn-ui:v1.6.0 --platform linux/amd64 --key carbide-key.pub
 3:32PM INF signature verified for image [rgcrprod.azurecr.us/longhornio/longhorn-ui:v1.6.0]
 3:32PM INF added 'image' to store at [rgcrprod.azurecr.us/longhornio/longhorn-ui:v1.6.0]
 
 # add a helm chart with a specific version
-[root@connected-server hauler]# hauler store add chart rancher --repo https://releases.rancher.com/server-charts/stable --version 2.8.2
+[root@connected-server hauler] hauler store add chart rancher --repo https://releases.rancher.com/server-charts/stable --version 2.8.2
 3:33PM INF added 'chart' to store at [hauler/rancher:2.8.2], with digest [sha256:27e742f51e66e32512509a95523bc9a531ec63f723c730b47685e7678cbc30d3]
 
 # add a file and assign it a new name
-[root@connected-server hauler]# hauler store add file https://get.rke2.io --name install.sh
+[root@connected-server hauler] hauler store add file https://get.rke2.io --name install.sh
 3:34PM INF added 'file' to store at [hauler/get.rke2.io:latest], with digest [sha256:0bffbf5fecf9dda70c112153a6ea90392cc2e67c55fa82cc7bb0679b03ef68e0]
 ```
 
@@ -164,7 +164,7 @@ spec:
 EOF
 
 # fetch the content from hauler manifest
-[root@connected-server hauler]# hauler store sync --files hauler-manifest.yaml
+[root@connected-server hauler] hauler store sync --files hauler-manifest.yaml
 3:36PM INF syncing [content.hauler.cattle.io/v1alpha1, Kind=Images] to store
 3:36PM INF added 'image' to store at [index.docker.io/neuvector/scanner:latest]
 3:36PM INF signature verified for image [rgcrprod.azurecr.us/longhornio/longhorn-ui:v1.6.0]
@@ -183,7 +183,7 @@ Once we've added all the above artifacts, we can verify and view all the **conte
 
 ```bash
 # view the content in the local hauler store
-[root@connected-server hauler]# hauler store info
+[root@connected-server hauler] hauler store info
 +-------------------------------+-------+-------------+----------+----------+
 | REFERENCE                     | TYPE  | PLATFORM    |  LAYERS  |   SIZE   |
 +-------------------------------+-------+-------------+----------+----------+
@@ -202,11 +202,11 @@ Once we've added all the above artifacts, we can verify and view all the **conte
 
 ---
 
-It's that easy! As you can see we have various types of artifacts in our `store` and we are ready to save it as a `haul`, aka a compressed archive, by running the command below:
+It's that easy! As you can see we have various types of artifacts in our `store` and we are ready to save it as a `haul`, aka the compressed archive or tarball, by running the command below:
 
 ```bash
 # save and export the content in the local hauler store
-[root@connected-server hauler]# hauler store save --filename haul.tar.zst
+[root@connected-server hauler] hauler store save --filename haul.tar.zst
 3:40PM INF saved store [store] -> [/opt/hauler/haul.tar.zst]
 ```
 
@@ -214,11 +214,15 @@ Now that we have our `haul`, we need to move it to the `disconnected-server`. I'
 
 ---
 
+---
+
+---
+
 Once we have the `haul` on the `disconnected-server`, let's run the command below to load the `haul`:
 
 ```bash
 # load and import the airgapped content to the new local hauler store
-[root@disconnected-server hauler]# hauler store load haul.tar.zst
+[root@disconnected-server hauler] hauler store load haul.tar.zst
 3:43PM INF loading content from [haul.tar.zst] to [store]
 ```
 
@@ -228,7 +232,7 @@ Now that we have loaded our `haul`, let's verify and view the **content** in our
 
 ```bash
 # view the content in the local hauler store
-[root@disconnected-server hauler]# hauler store info
+[root@disconnected-server hauler] hauler store info
 +-------------------------------+-------+-------------+----------+----------+
 | REFERENCE                     | TYPE  | PLATFORM    |  LAYERS  |   SIZE   |
 +-------------------------------+-------+-------------+----------+----------+
@@ -249,14 +253,41 @@ As you can see, in a handful of commands, we now have all of the **content** fro
 
 ## Bootstrapping Utilities
 
+One more aspect of **Hauler** that really deserves to be highlighted. If you have worked in DevSecOps or Kubernetes or Docker space, you are probably very familiar with the difficult problem of boostrapping your environment(s). Not only does **Hauler** enable you to fetch, package and distribute your artifacts, but it enables you to serve your artifacts out to be used by your infrastructure or applications! I briefly mentioned it earlier, but **Hauler** does this with an embedded registry and embedded fileserver.
+
+Let's head back to our `disconnected-server` and take a look by running the command below:
+
+```bash
+[root@disconnected-server hauler] hauler store serve --help
+Expose the content of a local store through an OCI compliant registry or file server
+
+Usage:
+  hauler store serve [flags]
+  hauler store serve [command]
+
+Available Commands:
+  fileserver  Serve the file server
+  registry    Serve the embedded registry
+
+Flags:
+  -h, --help   help for serve
+
+Global Flags:
+      --cache string       Location of where to store cache data (defaults to $XDG_CACHE_DIR/hauler)
+  -l, --log-level string    (default "info")
+  -s, --store string       Location to create store at (default "store")
+
+Use "hauler store serve [command] --help" for more information about a command.
+```
+
 ### Embedded Registry
 
-Text here...
+Now let's go ahead and server a `registry` by running the command below:
 
 ```bash
 # serve the content as a registry from the hauler store
 # defaults to <FQDN or IP>:5000
-[root@disconnected-server hauler]# hauler store serve registry
+[root@disconnected-server hauler] hauler store serve registry
 3:49PM INF neuvector/scanner:latest
 3:49PM INF longhornio/longhorn-ui:v1.6.0
 3:49PM INF hauler/install.sh:latest
@@ -269,9 +300,14 @@ INFO[0003] redis not configured                          go.version=go1.21.7 ver
 INFO[0003] Starting upload purge in 38m0s                go.version=go1.21.7 version=v3.0.0+unknown
 INFO[0003] using inmemory blob descriptor cache          go.version=go1.21.7 version=v3.0.0+unknown
 INFO[0003] listening on [::]:5000                        go.version=go1.21.7 version=v3.0.0+unknown
+```
 
-# view the registry and verify the available images
-[root@disconnected-server hauler]# curl -sfL localhost:5000/v2/_catalog | jq
+---
+
+Once the `registry` is ready, on the default port of `5000`, we can verify and view the available images with this awesome `curl` command:
+
+```bash
+[root@disconnected-server hauler] curl -sfL localhost:5000/v2/_catalog | jq
 {
   "repositories": [
     "hauler/install.sh",
@@ -284,17 +320,22 @@ INFO[0003] listening on [::]:5000                        go.version=go1.21.7 ver
 
 ### Embedded Fileserver
 
-Text here...
+Now let's go ahead and server a `fileserver` by running the command below:
 
 ```bash
 # serve the file content as a fileserver from the hauler store
 # defaults to <FQDN or IP>:8080
-[root@disconnected-server hauler]# hauler store serve fileserver
+[root@disconnected-server hauler] hauler store serve fileserver
 3:52PM INF copied artifacts to [store-files]
 3:52PM INF starting file server on port [8080]
+```
 
-# view the fileserver and verify the available files
-[root@disconnected-server hauler]# curl -sfL http://localhost:8080
+---
+
+Once the `fileserver` is ready, on the default port of `8080`, we can verify and view the available files with a `curl` command:
+
+```bash
+[root@disconnected-server hauler] curl -sfL http://localhost:8080
 <pre>
 <a href="install.sh">install.sh</a>
 <a href="rancher-2.8.2.tgz">rancher-2.8.2.tgz</a>
@@ -303,25 +344,37 @@ Text here...
 
 ### Existing Infrastructure?
 
+What if you already have a `registry` or `fileserver` on your airgapped or disconnect environment? Well! **Hauler** does not have to server out a `registry` or `fileserver`. Instead we can use `Hauler` to copy the artifacts in our `store` to our `registry` or `fileserver`.
+
+---
+
+Let's copy the artifacts to an exiting `registry` by running the command below:
+
 ```bash
 # copy the content to a registry from the hauler store
 # copies oci compliant artifacts
-[root@disconnected-server hauler]# hauler store copy registry://localhost:5000
+[root@disconnected-server hauler] hauler store copy registry://localhost:5000
 3:55PM INF hauler/install.sh:latest
 3:55PM INF longhornio/longhorn-ui:v1.6.0
 3:55PM INF hauler/rancher:2.8.2
 3:55PM INF neuvector/scanner:latest
 3:55PM INF longhornio/longhorn-ui:v1.6.0
 3:55PM INF copied artifacts to [localhost:5000]
+```
 
+---
+
+Let's copy the artifacts to an exiting `fileserver` by running the command below:
+
+```bash
 # copy the content to a directory from the hauler store
 # copies non oci compliant artifacts
-[root@disconnected-server hauler]# hauler store copy dir://hauler-files
+[root@disconnected-server hauler] hauler store copy dir://hauler-files
 3:57PM INF copied artifacts to [hauler-files]
 ```
 
 ## What is Next?
 
-Looking ahead, **Rancher Government Hauler** will continue to mature and evolve, with new features and enhancements aimed at enhancing the user experience, improving performance and reliability, and expanding compatibility with existing workflows.
+Congratulations! You made it!! Hopefully, you realize how **Hauler** would be able to simplify and streamline your existing processes for fetching, packaging, validating, and distributing artfacts to airgapped, disconnected, or denied, disrupted, intermittent, and limited impact environments.
 
-To learn more, please visit the [GitHub Repository](https://github.com/rancherfederal/hauler) or check out the [official documentation](https://hauler.dev). For any questions or to get in touch with me, please send me an email at[zack.brady@ranchergovernment.com](mailto:zack.brady@ranchergovernment.com)!
+To learn more, please visit the [GitHub Repository](https://github.com/rancherfederal/hauler) or check out the [Official Documentation](https://hauler.dev). For any questions or to get in touch with me, please send me an email at[zack.brady@ranchergovernment.com](mailto:zack.brady@ranchergovernment.com)!
