@@ -162,7 +162,9 @@ spec:
     - path: https://get.rke2.io
       name: install.sh
 EOF
+```
 
+```bash
 # fetch the content from hauler manifest
 [root@connected-server hauler] hauler store sync --files hauler-manifest.yaml
 3:36PM INF syncing [content.hauler.cattle.io/v1alpha1, Kind=Images] to store
