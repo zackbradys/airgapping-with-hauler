@@ -166,7 +166,7 @@ EOF
 
 ```bash
 # fetch the content from hauler manifest
-[root@connected-server hauler] hauler store sync --files hauler-manifest.yaml
+[root@connected-server hauler] hauler store sync --filename hauler-manifest.yaml
 3:36PM INF syncing [content.hauler.cattle.io/v1alpha1, Kind=Images] to store
 3:36PM INF added 'image' to store at [index.docker.io/neuvector/scanner:latest]
 3:36PM INF signature verified for image [rgcrprod.azurecr.us/longhornio/longhorn-ui:v1.6.0]
@@ -224,7 +224,7 @@ Once we have the `haul` on the `disconnected-server`, let's run the command belo
 
 ```bash
 # load and import the airgapped content to the new local hauler store
-[root@disconnected-server hauler] hauler store load haul.tar.zst
+[root@disconnected-server hauler] hauler store load --filename haul.tar.zst
 3:43PM INF loading content from [haul.tar.zst] to [store]
 ```
 
