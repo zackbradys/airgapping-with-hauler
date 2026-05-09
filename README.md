@@ -112,9 +112,9 @@ Let's run the following commands below:
 
 # add a image with a specific platform and with supply chain artifacts
 # may not work for all users due to the specified registry
-[root@connected-server hauler] hauler store add image rgcrprod.azurecr.us/longhornio/longhorn-ui:v1.6.0 --platform linux/amd64 --key carbide-key.pub
-3:32PM INF signature verified for image [rgcrprod.azurecr.us/longhornio/longhorn-ui:v1.6.0]
-3:32PM INF added 'image' to store at [rgcrprod.azurecr.us/longhornio/longhorn-ui:v1.6.0]
+[root@connected-server hauler] hauler store add image registry.ranchercarbide.dev/longhornio/longhorn-ui:v1.6.0 --platform linux/amd64 --key carbide-key.pub
+3:32PM INF signature verified for image [registry.ranchercarbide.dev/longhornio/longhorn-ui:v1.6.0]
+3:32PM INF added 'image' to store at [registry.ranchercarbide.dev/longhornio/longhorn-ui:v1.6.0]
 
 # add a helm chart with a specific version
 [root@connected-server hauler] hauler store add chart rancher --repo https://releases.rancher.com/server-charts/stable --version 2.8.2
@@ -139,7 +139,7 @@ metadata:
 spec:
   images:
     - name: neuvector/scanner:latest
-    - name: rgcrprod.azurecr.us/longhornio/longhorn-ui:v1.6.0
+    - name: registry.ranchercarbide.dev/longhornio/longhorn-ui:v1.6.0
       key: carbide-key.pub
       platform: linux/amd64
 ---
@@ -169,8 +169,8 @@ EOF
 [root@connected-server hauler] hauler store sync --filename hauler-manifest.yaml
 3:36PM INF syncing [content.hauler.cattle.io/v1alpha1, Kind=Images] to store
 3:36PM INF added 'image' to store at [index.docker.io/neuvector/scanner:latest]
-3:36PM INF signature verified for image [rgcrprod.azurecr.us/longhornio/longhorn-ui:v1.6.0]
-3:36PM INF added 'image' to store at [rgcrprod.azurecr.us/longhornio/longhorn-ui:v1.6.0]
+3:36PM INF signature verified for image [registry.ranchercarbide.dev/longhornio/longhorn-ui:v1.6.0]
+3:36PM INF added 'image' to store at [registry.ranchercarbide.dev/longhornio/longhorn-ui:v1.6.0]
 3:36PM INF syncing [content.hauler.cattle.io/v1alpha1, Kind=Charts] to store
 3:36PM INF added 'chart' to store at [hauler/rancher:2.8.2], with digest [sha256:27e742f51e66e32512509a95523bc9a531ec63f723c730b47685e7678cbc30d3]
 3:36PM INF syncing [content.hauler.cattle.io/v1alpha1, Kind=Files] to store
